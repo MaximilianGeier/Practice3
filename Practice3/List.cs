@@ -15,6 +15,8 @@ namespace Practice3
             if (Last != null)
                 Last.Next = newEl;
             Last = newEl;
+            if (First == null)
+                First = newEl;
 
             Count++;
         }
@@ -24,18 +26,25 @@ namespace Practice3
             if (First != null)
                 First.Previous = newEl;
             First = newEl;
+            if (Last == null)
+                Last = newEl;
 
             Count++;
         }
 
-        public void Remove(Object value)
+        public void Remove(object value)
         {
-            Node node = Last;
+            Node node = First;
             while (node != null)
             {
-                if (node.Value == value)
+                if (node.Value.Equals(value))
                 {
                     DeliteNode(node);
+                    return;
+                }
+                else
+                {
+                    node = node.Next;
                 }
             }
         }
