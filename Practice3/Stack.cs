@@ -6,38 +6,32 @@ namespace Practice3
 {
     class Stack
     {
-        public List<object> St = new List<object>();
+        private List list = new List();
         public void Push(object temp)
         {
-            St.Add(temp);
+            list.AddLast(temp);
         }
 
         public object Pop()
         {
-            object temp = St[^1];
-            St.Remove(St.Count - 1);
+            object temp = list.GetLast();
+            list.RemoveLast();
             return temp;
         }
 
         public object Top()
         {
-            return St[^1];
+            return list.GetLast();
         }
 
         public bool isEmpty()
         {
-            if (St.Count == 0)
-                return true;
-            return false;
+            return list.Count == 0;
         }
 
         public void Print()
         {
-            while(St.Count != 0)
-            {
-                Console.WriteLine(St[^1]);
-                St.Remove(St.Count + 1);
-            }
+            list.PrintToConsole();
         }
     }
 }

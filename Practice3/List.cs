@@ -6,35 +6,35 @@ namespace Practice3
     class List
     {
         public int Count { get; private set; } = 0;
-        private Node First;
-        private Node Last;
+        private Node first;
+        private Node last;
 
         public void AddLast(Object value)
         {
-            Node newEl = new Node(Last, null, value);
-            if (Last != null)
-                Last.Next = newEl;
-            Last = newEl;
-            if (First == null)
-                First = newEl;
+            Node newEl = new Node(last, null, value);
+            if (last != null)
+                last.Next = newEl;
+            last = newEl;
+            if (first == null)
+                first = newEl;
 
             Count++;
         }
         public void AddFirst(Object value)
         {
-            Node newEl = new Node(null, First, value);
-            if (First != null)
-                First.Previous = newEl;
-            First = newEl;
-            if (Last == null)
-                Last = newEl;
+            Node newEl = new Node(null, first, value);
+            if (first != null)
+                first.Previous = newEl;
+            first = newEl;
+            if (last == null)
+                last = newEl;
 
             Count++;
         }
 
         public void Remove(object value)
         {
-            Node node = First;
+            Node node = first;
             while (node != null)
             {
                 if (node.Value.Equals(value))
@@ -50,7 +50,7 @@ namespace Practice3
         }
         public void RemoveAt(int index)
         {
-            Node node = First;
+            Node node = first;
             for (int i = 0; i < Count; i++)
             {
                 if (i == index)
@@ -66,27 +66,27 @@ namespace Practice3
         }
         public void RemoveFirst()
         {
-            DeliteNode(First);
+            DeliteNode(first);
         }
         public void RemoveLast()
         {
-            DeliteNode(Last);
+            DeliteNode(last);
         }
         private void DeliteNode(Node node)
         {
-            if (First == Last)
+            if (first == last)
             {
-                First = null;
-                Last = null;
+                first = null;
+                last = null;
             }
-            else if (node == First)
+            else if (node == first)
             {
-                First = node.Next;
+                first = node.Next;
                 node.Next.Previous = null;
             }
-            else if (node == Last)
+            else if (node == last)
             {
-                Last = node.Previous;
+                last = node.Previous;
                 node.Previous.Next = null;
             }
             else
@@ -102,7 +102,7 @@ namespace Practice3
         {
             get
             {
-                Node node = First;
+                Node node = first;
                 for (int i = 0; i < Count; i++)
                 {
                     if (i == index)
@@ -114,7 +114,7 @@ namespace Practice3
             }
             set
             {
-                Node node = First;
+                Node node = first;
                 for (int i = 0; i < Count; i++)
                 {
                     if (i == index)
@@ -124,17 +124,38 @@ namespace Practice3
                 }
             }
         }
-    }
-    class Node
-    {
-        public Node Next { get; set; }
-        public Node Previous { get; set; }
-        public Object Value { get; set; }
-        public Node(Node previous, Node next, Object value)
+
+        public Object GetFirst()
         {
-            Previous = previous;
-            Next = next;
-            Value = value;
+            return first.Value;
+        }
+        public Object GetLast()
+        {
+            return last.Value;
+        }
+
+        public void PrintToConsole()
+        {
+            Node node = first;
+            for (int i = 0; i < Count; i++)
+            {
+                Console.WriteLine(node.Value);
+                node = node.Next;
+            }
+        }
+
+        class Node
+        {
+            public Node Next { get; set; }
+            public Node Previous { get; set; }
+            public Object Value { get; set; }
+            public Node(Node previous, Node next, Object value)
+            {
+                Previous = previous;
+                Next = next;
+                Value = value;
+            }
         }
     }
+    
 }
