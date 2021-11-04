@@ -7,15 +7,12 @@ namespace Practice3
         static void Main(string[] args)
         {
             var st = new Stack();
-            for (int i = 0; i < 5; i++)
-            {
-                st.Push(i);
-            }
-            for (int i = 0; i < 5; i++)
-            {
-                Console.WriteLine(st.Pop());
-            }
-            Console.WriteLine(st.isEmpty());
+            st.Push(12);
+            st.Top();
+            st.Top();
+
+            Queue instractions = Parser.GetFileData(@"C:\\test.txt");
+            Parser.ExecuteInstractions(instractions);
         }
     }
 }
