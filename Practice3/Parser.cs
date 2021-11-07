@@ -46,7 +46,7 @@ namespace Practice3
                         Console.WriteLine(stack.Top());
                         break;
                     case "4":
-                        Console.WriteLine(stack.isEmpty());
+                        Console.WriteLine(stack.IsEmpty());
                         break;
                     case "5":
                         stack.Print();

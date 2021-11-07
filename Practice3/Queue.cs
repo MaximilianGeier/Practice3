@@ -24,5 +24,13 @@ namespace Practice3
                 return null;
             return list.GetFirst();
         }
+        public bool IsEmpty()
+        {
+            return list.Count == 0;
+        }
+        public void Print()
+        {
+            list.PrintToConsole();
+        }
     }
 }

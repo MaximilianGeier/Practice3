@@ -24,7 +24,7 @@ namespace Practice3
             return list.GetLast();
         }
 
-        public bool isEmpty()
+        public bool IsEmpty()
         {
             return list.Count == 0;
         }
