@@ -25,6 +25,9 @@ namespace Practice3
                     temp = string.Empty;
                 }
             }
+            if (temp.Length > 0)
+                instruction.Enqueue(temp);
+
             return instruction;
         }
 
@@ -47,6 +50,7 @@ namespace Practice3
                         break;
                     case "5":
                         stack.Print();
+                        Console.WriteLine();
                         break;
                     default:
                         if (temp[0] == '1')

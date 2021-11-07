@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Practice3
 {
@@ -11,7 +12,7 @@ namespace Practice3
             st.Top();
             st.Top();
 
-            Queue instractions = Parser.GetFileData(@"C:\\test.txt");
+            Queue instractions = Parser.GetFileData(Directory.GetCurrentDirectory() + @"\\..\\..\\.." + @"\TextFile.txt");
             Parser.ExecuteInstractions(instractions);
         }
     }

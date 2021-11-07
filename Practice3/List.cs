@@ -127,21 +127,26 @@ namespace Practice3
 
         public Object GetFirst()
         {
-            return first.Value;
+            return first != null ? first.Value : null;
         }
         public Object GetLast()
         {
-            return last.Value;
+            return last != null ? last.Value : null;
         }
 
         public void PrintToConsole()
         {
             Node node = first;
+            Console.Write("[");
             for (int i = 0; i < Count; i++)
             {
-                Console.WriteLine(node.Value);
+                Console.Write(node.Value + ",");
                 node = node.Next;
             }
+            if (Count > 0)
+                Console.Write("\b]");
+            else
+                Console.Write("]");
         }
 
         class Node
