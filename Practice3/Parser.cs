@@ -31,7 +31,7 @@ namespace Practice3
             return instruction;
         }
 
-        public static void ExecuteInstractions(Queue instractions)
+        public static void ExecuteInstractionsToStack(Queue instractions)
         {
             Stack stack = new Stack();
             while(instractions.Peek() != null)
@@ -73,6 +73,36 @@ namespace Practice3
             }
 
             return output;
+        }
+        public static void ExecuteInstractionsToQueue(Queue instractions)
+        {
+            Queue q = new Queue();
+            while(instractions.Peek() != null)
+            {
+                string temp = (string)instractions.Dequeue();
+                switch(temp)
+                {
+                    case "2":
+                        Console.WriteLine(q.Dequeue());
+                        break;
+                    case "3":
+                        Console.WriteLine(q.Peek());
+                        break;
+                    case "4":
+                        Console.WriteLine(q.IsEmpty());
+                        break;
+                    case "5":
+                        q.Print();
+                        break;
+                    default:
+                        if (temp[0] == '1')
+                        {
+                            q.Enqueue(temp.Substring(2));
+                            Console.WriteLine(q.Peek());
+                        }
+                        break;
+                }
+            }
         }
     }
 }

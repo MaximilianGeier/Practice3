@@ -27,7 +27,23 @@ namespace Practice3
             Console.WriteLine();
             Console.WriteLine(RPN.Calculate(parsedExp));
 
-            
+            /*            List list = new List();
+
+                        for (int i = 0; i < 6; i++)
+                        {
+                            list.AddLast(i);
+                        }
+                        list.AddInIncreasingOrder(3);
+                        list.AddInIncreasingOrder(4);
+                        list.AddInIncreasingOrder(-1);
+                        list.AddInIncreasingOrder(6);
+                        list.PrintToConsole();
+
+                        list.Replace(-3,3);
+                        list.PrintToConsole();*/
+
+            Queue inst = Parser.GetFileData("C://test.txt");
+            Parser.ExecuteInstractionsToQueue(inst);
 
             /*list.AddLast('a');
             list.AddLast('b');
