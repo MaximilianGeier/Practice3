@@ -7,6 +7,8 @@ namespace Practice3
     {
         static void Main(string[] args)
         {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("ry"); // нужно для корректного перевода чисел с плавающей запятой из строки
+
             /*var st = new Stack();
             st.Push(12);
             st.Top();
@@ -14,21 +16,18 @@ namespace Practice3
 
             Queue instractions = Parser.GetFileData(Directory.GetCurrentDirectory() + @"\\..\\..\\.." + @"\input.txt");
             Parser.ExecuteInstractions(instractions);*/
-
-            List list = new List();
-
-            for (int i = 0; i < 6; i++)
+            string expression = Parser.GetStringsFromFile("../../../expression.txt")[0];
+            Console.WriteLine(expression);
+            List parsedExp = RPN.ParseExpression(expression);
+            parsedExp = RPN.ParseOPZFromString(Parser.GetStringsFromFile("../../../expressionRPN.txt")[0]); 
+            for (int i = 0; i < parsedExp.Count; i++)
             {
-                list.AddLast(i);
+                Console.Write(parsedExp[i] + " ");
             }
-            list.AddInIncreasingOrder(3);
-            list.AddInIncreasingOrder(4);
-            list.AddInIncreasingOrder(-1);
-            list.AddInIncreasingOrder(6);
-            list.PrintToConsole();
+            Console.WriteLine();
+            Console.WriteLine(RPN.Calculate(parsedExp));
 
-            list.Replace(-3,3);
-            list.PrintToConsole();
+            
 
             /*list.AddLast('a');
             list.AddLast('b');
@@ -37,5 +36,7 @@ namespace Practice3
             list.AddInIncreasingOrder('c');
             list.PrintToConsole();*/
         }
+
+        
     }
 }

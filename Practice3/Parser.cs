@@ -62,5 +62,17 @@ namespace Practice3
                 }
             }
         }
+        public static string[] GetStringsFromFile(string path)
+        {
+            string[] output = new string[4];
+            int i = 0;
+            foreach (string element in File.ReadLines(path))
+            {
+                output[i] = element;
+                i++;
+            }
+
+            return output;
+        }
     }
 }

@@ -158,6 +158,19 @@ namespace Practice3
                 Console.Write("]");
         }
 
+        public bool Contains(Object value)
+        {
+            Node curNode = first;
+            while(curNode != null)
+            {
+                if (curNode.Value.Equals(value))
+                    return true;
+
+                curNode = curNode.Next;
+            }
+            return false;
+        }
+
         #region //Регион доп функций
         public void Reverse()
         {
