@@ -17,6 +17,7 @@ namespace Practice3
 
             Queue instractions = Parser.GetFileData(Directory.GetCurrentDirectory() + @"\\..\\..\\.." + @"\input.txt");
             Parser.ExecuteInstractions(instractions);*/
+<<<<<<< HEAD
             /*            string expression = Parser.GetStringsFromFile("../../../expression.txt")[0];
                         Console.WriteLine(expression);
                         List parsedExp = PostfixNotation.GetPostfixNotation(expression);
@@ -42,6 +43,19 @@ namespace Practice3
 
                         list.Replace(-3,3);
                         list.PrintToConsole();*/
+=======
+
+            /*string expression = Parser.GetStringsFromFile("../../../expression.txt")[0];
+            Console.WriteLine(expression);
+            List parsedExp = PostfixNotation.GetPostfixNotation(expression);
+            parsedExp = PostfixNotation.GetListOfTokensFromPNString(Parser.GetStringsFromFile("../../../expressionRPN.txt")[0]); 
+            for (int i = 0; i < parsedExp.Count; i++)
+            {
+                Console.Write(parsedExp[i] + " ");
+            }
+            Console.WriteLine();
+            Console.WriteLine(PostfixNotation.Calculate(parsedExp));*/
+>>>>>>> TempBranch
 
             /*Queue inst = Parser.GetFileData("C://test.txt");
             Parser.ExecuteInstractionsToQueue(inst);*/
@@ -53,7 +67,12 @@ namespace Practice3
             list.AddInIncreasingOrder('c');
             list.PrintToConsole();*/
 
+<<<<<<< HEAD
             Console.WriteLine("---------------------------------" + GetTimeOfFunctionExecuting());
+=======
+            PostMachine machine = new PostMachine();
+            machine.Perform();
+>>>>>>> TempBranch
         }
 
         static long GetTimeOfFunctionExecuting()

@@ -54,7 +54,6 @@ namespace Practice3
             List pInput = GetListOfTokens(input);
             List firstList = new List();
             List secondList = new List();
-            bool isDebugEnabled = false;
 
             for (int i = 0; i < pInput.Count; i++)
             {
@@ -90,28 +89,6 @@ namespace Practice3
                         }
                     }
                     secondList.AddLast(pInput[i]);
-                }
-
-                if (isDebugEnabled)
-                {
-                    for (int ii = 0; ii < pInput.Count; ii++)
-                    {
-                        if (ii == i) Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(pInput[ii] + " ");
-                        Console.ResetColor();
-                    }
-                    Console.WriteLine();
-                    Console.WriteLine();
-
-                    string local = "";
-                    for (int ii = 0; ii < firstList.Count; ii++) local += firstList[ii] + " ";
-                    Console.WriteLine("Первая строка: " + local);
-                    local = "";
-                    for (int ii = 0; ii < secondList.Count; ii++) local += secondList[ii] + " ";
-                    Console.WriteLine("Вторая строка: " + local);
-
-                    Console.ReadKey(true);
-                    Console.Clear();
                 }
             }
 
