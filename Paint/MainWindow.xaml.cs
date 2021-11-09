@@ -21,7 +21,7 @@ namespace Paint
         Point currentPoint = new Point();
         Stack History = new Stack();
         public bool Color = true;
-        int StrokeThickness = 5;
+        int StrokeThickness = 1;
         public MainWindow()
         {
             InitializeComponent();
@@ -87,11 +87,13 @@ namespace Paint
         {
             if(StrokeThickness > 1)
                 StrokeThickness--;
+            LabelStrokeThickness.Content = "Толщина кисти: " + StrokeThickness.ToString();
         }
 
         private void AddStrokeThickness(object sender, RoutedEventArgs e)
         {
             StrokeThickness++;
+            LabelStrokeThickness.Content = "Толщина кисти: " + StrokeThickness.ToString();
         }
     }
 }

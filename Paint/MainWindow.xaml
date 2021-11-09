@@ -16,6 +16,7 @@
         </Canvas>
         <Button Content=" + " Click="AddStrokeThickness" HorizontalAlignment="Left" Margin="153,1,0,0" VerticalAlignment="Top"/>
         <Button Content=" - " Click="SubtractStrokeThickness" HorizontalAlignment="Left" Margin="177,1,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LabelStrokeThickness" Content="Толщина кисти: 1" HorizontalAlignment="Left" Margin="197,-1,0,0" VerticalAlignment="Top" Height="26"/>
 
     </Grid>
 </Window>
