@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Practice3
 {
-    class Stack
+    public class Stack
     {
         private List list = new List();
         public void Push(object temp)
