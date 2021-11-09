@@ -18,14 +18,14 @@ namespace Practice3
             Parser.ExecuteInstractions(instractions);*/
             string expression = Parser.GetStringsFromFile("../../../expression.txt")[0];
             Console.WriteLine(expression);
-            List parsedExp = RPN.ParseExpression(expression);
-            parsedExp = RPN.ParseOPZFromString(Parser.GetStringsFromFile("../../../expressionRPN.txt")[0]); 
+            List parsedExp = PostfixNotation.GetPostfixNotation(expression);
+            parsedExp = PostfixNotation.GetListOfTokensFromPNString(Parser.GetStringsFromFile("../../../expressionRPN.txt")[0]); 
             for (int i = 0; i < parsedExp.Count; i++)
             {
                 Console.Write(parsedExp[i] + " ");
             }
             Console.WriteLine();
-            Console.WriteLine(RPN.Calculate(parsedExp));
+            Console.WriteLine(PostfixNotation.Calculate(parsedExp));
 
             /*            List list = new List();
 
@@ -42,8 +42,8 @@ namespace Practice3
                         list.Replace(-3,3);
                         list.PrintToConsole();*/
 
-            Queue inst = Parser.GetFileData("C://test.txt");
-            Parser.ExecuteInstractionsToQueue(inst);
+            /*Queue inst = Parser.GetFileData("C://test.txt");
+            Parser.ExecuteInstractionsToQueue(inst);*/
 
             /*list.AddLast('a');
             list.AddLast('b');

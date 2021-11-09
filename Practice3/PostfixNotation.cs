@@ -3,10 +3,10 @@ using System.Text;
 
 namespace Practice3
 {
-    static class RPN
+    static class PostfixNotation
     {
-        static List signsList = new List();
-        static RPN()
+        static readonly List signsList = new List();
+        static PostfixNotation()
         {
             signsList.AddLast("+");
             signsList.AddLast("-");
@@ -20,11 +20,10 @@ namespace Practice3
             signsList.AddLast("log");
             signsList.AddLast("ln");
             signsList.AddLast("sqrt");
-            signsList.AddLast("!");
             signsList.AddLast("round");
         }
         
-        static int GetOrder(string operation)
+        static int GetPriority(string operation)
         {
             switch (operation)
             {
@@ -43,7 +42,6 @@ namespace Practice3
                 case "log":
                 case "ln":
                 case "sqrt":
-                case "!":
                 case "round":
                     return 10;
                 default:
@@ -51,10 +49,9 @@ namespace Practice3
             }
         }
 
-        //Получить постфиксную
-        static public List ParseExpression(string input)
+        static public List GetPostfixNotation(string input)
         {
-            List pInput = ParseInput(input);
+            List pInput = GetListOfTokens(input);
             List firstList = new List();
             List secondList = new List();
             bool isDebugEnabled = false;
@@ -86,7 +83,7 @@ namespace Practice3
                 {
                     if (secondList.Count >= 1)
                     {
-                        if (GetOrder((string)secondList[secondList.Count - 1]) >= GetOrder((string)pInput[i]))
+                        if (GetPriority((string)secondList[secondList.Count - 1]) >= GetPriority((string)pInput[i]))
                         {
                             firstList.AddLast(secondList[secondList.Count - 1]);
                             secondList.RemoveAt(secondList.Count - 1);
@@ -124,7 +121,7 @@ namespace Practice3
         }
 
         //Выделить в строке цифры и знаки
-        static List ParseInput(string input)
+        static List GetListOfTokens(string input)
         {
             List preOutput = new List();
             List output;
@@ -139,14 +136,14 @@ namespace Practice3
                     {
                         if (Char.IsDigit(input[i]) || input[i] == '.')
                         {
-                            preOutput[preOutput.Count - 1] = (string)preOutput[preOutput.Count - 1] + input[i];
+                            preOutput[^1] = (string)preOutput.GetLast() + input[i];
                         }
                         else
                         {
                             if (input[i] == 'E' && (input[i + 1] == '+' || input[i + 1] == '-'))
                             {
-                                preOutput[preOutput.Count - 1] = (string)preOutput[preOutput.Count - 1] + input[i];
-                                preOutput[preOutput.Count - 1] = (string)preOutput[preOutput.Count - 1] + input[i + 1];
+                                preOutput[^1] = (string)preOutput.GetLast() + input[i];
+                                preOutput[^1] = (string)preOutput.GetLast() + input[i + 1];
                                 i++;
                             }
                             else
@@ -157,8 +154,7 @@ namespace Practice3
                         }
                     }
                 }
-                else
-                if (signsList.Contains(Convert.ToString(input[i])))
+                else if (signsList.Contains(Convert.ToString(input[i])))
                 {
                     if (input[i] == '-')
                         if (i > 0)
@@ -167,11 +163,12 @@ namespace Practice3
                                 preOutput.AddLast("0");
                         }
                         else
+                        {
                             preOutput.AddLast("0");
+                        }
                     preOutput.AddLast(Convert.ToString(input[i]));
                 }
-                else
-                if (input[i] != ' ' && input[i] != ',' && input[i] != ';')
+                else if (input[i] != ' ' && input[i] != ',' && input[i] != ';')
                 {
                     string local = "";
                     for (; ; i++)
@@ -191,7 +188,7 @@ namespace Practice3
             return output;
         }
 
-        public static List ParseOPZFromString(string data)
+        public static List GetListOfTokensFromPNString(string data)
         {
             List output = new List();
             data = data.Replace("  ", " ");
@@ -214,12 +211,11 @@ namespace Practice3
             return output;
         }
 
-        //Калькулятор
         static public double Calculate(List input)
         {
             for (int i = 0; i < input.Count; i++)
             {
-                if (signsList.Contains(input[i]))
+                if (!IsStringDigit((string)input[i]))
                 {
                     switch (input[i])
                     {
@@ -275,23 +271,23 @@ namespace Practice3
                             input.RemoveAt(i - 1);
                             i -= 1;
                             break;
-                        case "!":
-                            double x = 1;
-                            for (int ii = 2; ii <= Convert.ToInt32(input[i - 1]); ii++) x *= ii;
-                            input[i] = Convert.ToString(x);
-                            input.RemoveAt(i - 1);
-                            i -= 1;
-                            break;
                         case "round":
                             input[i] = Convert.ToString(Math.Round(Convert.ToDouble(input[i - 1])));
                             input.RemoveAt(i - 1);
                             i -= 1;
                             break;
+                        default:
+                            throw new Exception("Неожиданная операция");
                     }
                 }
             }
 
             return Convert.ToDouble(input[0]);
+
+            bool IsStringDigit(string input)
+            {
+                return Char.IsDigit(input[0]) || (input.Length > 1 && Char.IsDigit(input[1]));
+            }
         }
     }
 }
