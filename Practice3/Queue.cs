@@ -7,15 +7,18 @@ namespace Practice3
     public class Queue
     {
         private List list = new List();
+        public int Count { get; private set; } = 0;
         public void Enqueue(Object item)
         {
             list.AddLast(item);
+            Count++;
         }
 
         public Object Dequeue()
         {
             Object temp = list.GetFirst();
             list.RemoveFirst();
+            Count--;
             return temp;
         }
         public Object Peek()
