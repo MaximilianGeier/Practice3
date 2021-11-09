@@ -38,9 +38,8 @@ namespace Practice3
             list.AddInIncreasingOrder('c');
             list.PrintToConsole();*/
 
-            Draftsman draftsman = new Draftsman();
-
-            draftsman.Perform();
+            PostMachine machine = new PostMachine();
+            machine.Perform();
         }
 
         
