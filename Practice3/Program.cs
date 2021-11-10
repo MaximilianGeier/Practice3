@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 
@@ -17,6 +17,7 @@ namespace Practice3
 
             Queue instractions = Parser.GetFileData(Directory.GetCurrentDirectory() + @"\\..\\..\\.." + @"\input.txt");
             Parser.ExecuteInstractions(instractions);*/
+
             /*            string expression = Parser.GetStringsFromFile("../../../expression.txt")[0];
                         Console.WriteLine(expression);
                         List parsedExp = PostfixNotation.GetPostfixNotation(expression);
@@ -43,6 +44,7 @@ namespace Practice3
                         list.Replace(-3,3);
                         list.PrintToConsole();*/
 
+
             /*string expression = Parser.GetStringsFromFile("../../../expression.txt")[0];
             Console.WriteLine(expression);
             List parsedExp = PostfixNotation.GetPostfixNotation(expression);
@@ -64,8 +66,10 @@ namespace Practice3
             list.AddInIncreasingOrder('c');
             list.PrintToConsole();*/
 
+
             //Console.WriteLine("---------------------------------" + GetTimeOfFunctionExecuting());
-            PostMachine machine = new PostMachine();
+
+            Draftsman machine = new Draftsman();
             machine.Perform();
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Practice3
 {
@@ -73,7 +74,7 @@ namespace Practice3
 
         void EnterField()
         {
-            Console.WriteLine("\nЗаполните поле (стрелочки передвигают коретку, space инвертирует ячейку, enter - запустить программу заполнение)\n");
+            Console.WriteLine("\nЗаполните поле (стрелочки передвигают коретку, space инвертирует ячейку, enter - запустить программу)\n");
 
             for (int i = 0; i <= maxPos; i++)
             {
@@ -106,7 +107,7 @@ namespace Practice3
         void DrawCarriage()
         {
             int pos = CarriagePos - indent;
-            if (pos >= 0 && pos < maxPos)
+            if (pos >= 0 && pos <= maxPos)
             {
                 Console.SetCursorPosition(pos * 2, Console.CursorTop);
                 Console.Write(@"\/");
@@ -115,7 +116,7 @@ namespace Practice3
         void EraseCarrige()
         {
             int pos = CarriagePos - indent;
-            if (pos >= 0 && pos < maxPos)
+            if (pos >= 0 && pos <= maxPos)
             {
                 Console.SetCursorPosition(pos * 2, Console.CursorTop);
                 Console.Write("  ");
