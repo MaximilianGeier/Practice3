@@ -10,6 +10,7 @@ namespace Practice3
         public List Commands;
         private List field = new List();
         private readonly int maxPos = Console.WindowWidth / 2 - 2;
+        private int indent = 0;
         public int CarriagePos { get; private set; }
         public PostMachine()
         {
@@ -47,7 +48,7 @@ namespace Practice3
                 {
                     Console.Write(strNum + ". ");
                     userInput = Console.ReadLine();
-                    if (userInput.Contains("end"))
+                    if (userInput.Length == 3 && userInput.Contains("end"))
                     {
                         return output;
                     }
@@ -104,22 +105,25 @@ namespace Practice3
         }
         void DrawCarriage()
         {
-            if (CarriagePos < maxPos)
+            int pos = CarriagePos - indent;
+            if (pos >= 0 && pos < maxPos)
             {
-                Console.SetCursorPosition(CarriagePos * 2, Console.CursorTop);
+                Console.SetCursorPosition(pos * 2, Console.CursorTop);
                 Console.Write(@"\/");
             }
         }
         void EraseCarrige()
         {
-            if (CarriagePos < maxPos)
+            int pos = CarriagePos - indent;
+            if (pos >= 0 && pos < maxPos)
             {
-                Console.SetCursorPosition(CarriagePos * 2, Console.CursorTop);
+                Console.SetCursorPosition(pos * 2, Console.CursorTop);
                 Console.Write("  ");
             }
         }
         void Execute()
         {
+            int iterationNum = 0;
             int i = 1;
             do
             {
@@ -129,12 +133,20 @@ namespace Practice3
                     case 'R':
                         EraseCarrige();
                         CarriagePos++;
-                        DrawCarriage();
+                        if (CarriagePos > field.Count)
+                            field.AddLast(false);
                         i = int.Parse(command.Substring(1));
+                        DrawCarriage();
                         break;
                     case 'L':
                         EraseCarrige();
-                        CarriagePos++;
+                        CarriagePos--;
+                        if (CarriagePos == -1)
+                        {
+                            field.AddFirst(false);
+                            CarriagePos = 0;
+                            indent++;
+                        }
                         DrawCarriage();
                         i = int.Parse(command.Substring(1));
                         break;
@@ -148,10 +160,13 @@ namespace Practice3
                     case '!':
                         return;
                     default:
-                        break;
+                        throw new Exception("Неожиданная команда");
                 }
+                iterationNum++;
+            } while(iterationNum < 100000);
 
-            } while(true);
+            Console.SetCursorPosition(0, Console.CursorTop + 2);
+            Console.WriteLine("Каретка зациклилась");
 
             int GetNextStrNumInCondition(string condition)
             {
@@ -179,11 +194,12 @@ namespace Practice3
         void InvertMark()
         {
             field[CarriagePos] = !((bool)field[CarriagePos]);
-            if (CarriagePos >= 0 && CarriagePos < maxPos)
+            int pos = CarriagePos - indent;
+            if (pos >= 0 && pos < maxPos)
             {
-                Console.SetCursorPosition(CarriagePos * 2, Console.CursorTop + 1);
+                Console.SetCursorPosition(pos * 2, Console.CursorTop + 1);
 
-                if ((bool)field[CarriagePos])
+                if ((bool)field[pos])
                     Console.Write("██");
                 else
                     Console.Write("  ");
